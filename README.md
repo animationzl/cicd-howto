@@ -109,3 +109,43 @@ https://gist.github.com/mrhillsman/f2f7867ad3ab2399f16d9efc7ffe4ec3
 # bash heredocs for nodepool configuration
 https://gist.github.com/mrhillsman/766dc50b9bf42cd81c71f9e18e841b41
 ```
+
+### PoC - Install OpenStack via Kolla-Ansible
+```shell
+# multinode inventory file, globals.yaml, and passwords.yaml
+# be sure to use kolla-ansible documentation to understand/edit
+mkdir /etc/kolla
+
+pip install kolla==4.0.2 # ocata
+pip install kolla-ansible==4.0.2 # ocata
+
+# generate /etc/kolla/passwords.yml
+kolla-genpwd
+
+https://gist.github.com/mrhillsman/be2d4968f8fb39ff2dd38d8e5b5c27e7
+
+
+```
+
+```shell
+# put your openstack credentials in place
+mkdir -p /root/.config/openstack
+
+cat << EOF > /root/.config/openstack/clouds.yaml
+clouds:
+  openlab:
+    auth:
+      username: 'admin'
+      password: 'Mc3ikupo'
+      project_id: '16da6a0c93944eec9905cdab86ec92e6'
+      auth_url: 'http://172.29.176.100:5000/v3'
+      project_name: 'admin'
+      project_domain_name: 'default'
+      user_domain_name: 'default'
+EOF
+```
+
+```shell
+# start services
+
+```
