@@ -9,8 +9,10 @@ Components:
   DiskImage Builder
   Kolla
 
+
 Change to root directory:
 cd /root
+
 
 Add bubblewrap ppa:
 apt install software-properties-common python-software-properties
@@ -19,8 +21,10 @@ add-apt-repository ppa:openstack-ci-core/bubblewrap
 
 apt update
 
+
 Run package upgrade:
 apt update && apt upgrade -y
+
 
 Install MariaDB and Zookeeper:
 apt install mariadb-server mariadb-client
@@ -58,6 +62,7 @@ EOF
 
 /root/zookeeper-3.4.10/bin/zkServer.sh start
 
+
 Install DiskImage Builder:
 cd /root
 
@@ -69,7 +74,6 @@ pip install -e .
 
 rsync -avz /root/diskimage-builder/diskimage-builder/elements/ /etc/nodepool/elements/
 rsync -avz /root/openlab-config/elements /etc/nodepool/elements/
-
 
 
 Install Zuul and Nodepool:
