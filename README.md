@@ -1,5 +1,5 @@
 # cicd-howto
-# steps to replicate the CI/CD environment
+### steps to replicate the CI/CD environment
 
 * Components
   * MariaDB
