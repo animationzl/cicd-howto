@@ -9,7 +9,7 @@ _steps to replicate the CI/CD environment_
   _DiskImage Builder_  
   _Kolla_  
 
-## Step-by-step
+## Step-by-step (all-in-one)
 
 ```shell
 # Change to root directory
