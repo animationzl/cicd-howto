@@ -34,7 +34,7 @@ apt update && apt upgrade -y
 # Install MariaDB and Zookeeper
 apt install mariadb-server mariadb-client
 
-wget [http://apache.mirrors.ionfish.org/zookeeper/current/zookeeper-3.4.10.tar.gz]()
+wget http://apache.mirrors.ionfish.org/zookeeper/current/zookeeper-3.4.10.tar.gz
 
 # you should consider changing the root password
 cat << EOF > /root/mysql_secure_installation.sql
@@ -72,8 +72,8 @@ EOF
 # Install DiskImage Builder
 cd /root
 
-git clone [https://github.com/openstack/diskimage-builder]()
-git clone [https://github.com/theopenlab/openlab-config]()
+git clone https://github.com/openstack/diskimage-builder
+git clone https://github.com/theopenlab/openlab-config
 
 cd /root/diskimage-builder
 pip install -e .
@@ -93,9 +93,9 @@ mkdir /opt/zuul-logs
 
 cd /root
 
-git clone [https://github.com/openstack-infra/zuul]() -b feature/zuulv3
+git clone https://github.com/openstack-infra/zuul -b feature/zuulv3
 
-git clone [https://github.com/openstack-infra/nodepool]() -b feature/zuulv3
+git clone https://github.com/openstack-infra/nodepool -b feature/zuulv3
 
 cd /root/zuul
 pip install -e .
@@ -104,8 +104,8 @@ cd /root/nodepool
 pip install -e .
 
 # bash heredocs for zuul configuration
-[https://gist.github.com/mrhillsman/f2f7867ad3ab2399f16d9efc7ffe4ec3]()
+https://gist.github.com/mrhillsman/f2f7867ad3ab2399f16d9efc7ffe4ec3
 
 # bash heredocs for nodepool configuration
-[https://gist.github.com/mrhillsman/766dc50b9bf42cd81c71f9e18e841b41]()
+https://gist.github.com/mrhillsman/766dc50b9bf42cd81c71f9e18e841b41
 ```
