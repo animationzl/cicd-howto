@@ -1,32 +1,36 @@
 # cicd-howto
 # steps to replicate the CI/CD environment
 
-Components:
-  MariaDB
-  Zookeeper
-  Zuul v3
-  Nodepool v3
-  DiskImage Builder
-  Kolla
+* Components
+  * MariaDB
+  * Zookeeper
+  * Zuul v3
+  * Nodepool v3
+  * DiskImage Builder
+  * Kolla
 
 
-Change to root directory:
+```shell
+# Change to root directory
 cd /root
+```
 
-
-Add bubblewrap ppa:
+```shell
+# Add bubblewrap ppa
 apt install software-properties-common python-software-properties
 
 add-apt-repository ppa:openstack-ci-core/bubblewrap
 
 apt update
+```
 
-
-Run package upgrade:
+```shell
+# Run package upgrade
 apt update && apt upgrade -y
+```
 
-
-Install MariaDB and Zookeeper:
+```shell
+# Install MariaDB and Zookeeper
 apt install mariadb-server mariadb-client
 
 wget http://apache.mirrors.ionfish.org/zookeeper/current/zookeeper-3.4.10.tar.gz
@@ -61,9 +65,10 @@ clientPort=2181
 EOF
 
 /root/zookeeper-3.4.10/bin/zkServer.sh start
+```
 
-
-Install DiskImage Builder:
+```shell
+# Install DiskImage Builder
 cd /root
 
 git clone https://github.com/openstack/diskimage-builder
@@ -74,9 +79,10 @@ pip install -e .
 
 rsync -avz /root/diskimage-builder/diskimage-builder/elements/ /etc/nodepool/elements/
 rsync -avz /root/openlab-config/elements /etc/nodepool/elements/
+```
 
-
-Install Zuul and Nodepool:
+```shell
+# Install Zuul and Nodepool
 mkdir /etc/zuul
 mkdir /etc/nodepool
 mkdir /var/log/zuul
@@ -101,4 +107,4 @@ https://gist.github.com/mrhillsman/f2f7867ad3ab2399f16d9efc7ffe4ec3
 
 # bash heredocs for nodepool configuration
 https://gist.github.com/mrhillsman/766dc50b9bf42cd81c71f9e18e841b41
-
+```
