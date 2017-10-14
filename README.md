@@ -1,14 +1,15 @@
-# cicd-howto
-### steps to replicate the CI/CD environment
+# OpenLab CI/CD
+_steps to replicate the CI/CD environment_
 
-* Components
-  * MariaDB
-  * Zookeeper
-  * Zuul v3
-  * Nodepool v3
-  * DiskImage Builder
-  * Kolla
+## Components Required
+  _MariaDB_  
+  _Zookeeper_  
+  _Zuul v3_  
+  _Nodepool v3_  
+  _DiskImage Builder_  
+  _Kolla_  
 
+## Step-by-step
 
 ```shell
 # Change to root directory
