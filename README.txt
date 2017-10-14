@@ -1,6 +1,5 @@
 # cicd-howto
 # steps to replicate the CI/CD environment
-Notes regarding how we setup the CICD
 
 Components:
   MariaDB
