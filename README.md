@@ -149,3 +149,49 @@ EOF
 # start services
 
 ```
+
+### Reference deployment view
+
+```txt
+
+                                     openlab status portal: http://80.158.20.68/
+                                                +
+                                                |
+                                                |
+                                                |
+                                                |
+                                                v
+
+                                      openlab-cicd-misc
+                                      +----------------------+                 github.com webhooks
+                                      |       Apache2        |                        +
+                                      |       Gearman        |                        |
+                                      |       Zookeeper      |                        |
+                                      |       Log-server     |                        |
+                                      +----------------------+                        v
+
+openlab-cicd-nodepool                     +              +                     openlab-cicd-zuul
++----------------------+                  |              |                     +-----------------------+
+|                      |                  |              |                     |                       |
+|   Nodepool-launcher  |                  |              |                     |     Zuul-scheduler    |
+|   Nodepool-builder   |  <---------------+              +---------------->    |     Zuul-executor     |
+|                      |                                                       |     Zuul-web          |
++----------------------+                                                       |     Zuul-merger       |
+                                                                               |                       |
+           +                                                                   +-----------------------+
+           |
+           |  Launch vm from provider                                                 +
+           |                                                                          |
+           v                                                                          |
+                                                                                      |
++----------------------+                                                              |
+|                      |                     Execute Ansible jobs                     |
+|                      |                                                              |
+| Huawei public cloud  |  <-----------------------------------------------------------+
+|                      |
+|                      |
++----------------------+
+
+
+
+```
