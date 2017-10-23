@@ -168,13 +168,13 @@ EOF
                                       |       Gearman        |                        |
                                       |       Zookeeper      |                        |
                                       |       Log-server     |                        |
-                                      +----------------------+                        v
-
-openlab-cicd-nodepool                     +              +                     openlab-cicd-zuul
-+----------------------+                  |              |                     +-----------------------+
+                                      |       Statsd         |                        v
+                                      +----------------------+
+openlab-cicd-nodepool                                                          openlab-cicd-zuul
++----------------------+                  +              +                     +-----------------------+
 |                      |                  |              |                     |                       |
 |   Nodepool-launcher  |                  |              |                     |     Zuul-scheduler    |
-|   Nodepool-builder   |  <---------------+              +---------------->    |     Zuul-executor     |
+|   Nodepool-builder   |  <---------------+              +------------------>  |     Zuul-executor     |
 |                      |                                                       |     Zuul-web          |
 +----------------------+                                                       |     Zuul-merger       |
                                                                                |                       |
@@ -191,7 +191,6 @@ openlab-cicd-nodepool                     +              +                     o
 |                      |
 |                      |
 +----------------------+
-
 
 
 ```
