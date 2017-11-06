@@ -854,3 +854,15 @@ openlab-cicd-nodepool                                                          o
 
 
 ```
+### Connect to OpenLab
+
+- Step 1: OpenLab maintainer will commit a pull request to target project that plan to connect OpenLab, **.zuul.yaml** will be included in PR, looks like: [gophercloud PR 593](https://github.com/gophercloud/gophercloud/pull/593)
+- Step 2: Target project maintainer should add **webhook** to point to OpenLab CI system in Settings -> Webhooks of Github project
+  - Payload URL: http://80.158.22.48:8001/connection/github/payload
+  - Content type: application/json
+  - Secret: ****** (OpenLab maintainer will send it to your email)
+  - Events: 
+    - Pull request
+    - Issue comment
+- Step 3: Target project maintainer should Add user **TheOpenLab-CI** to project Collaborators in Settings -> Collaborators & teams of Github project, aims to **TheOpenLab-CI** user can update tests result in comments of PR through Github status API
+
