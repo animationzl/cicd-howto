@@ -864,5 +864,5 @@ openlab-cicd-nodepool                                                          o
   - Events: 
     - Pull request
     - Issue comment
-- Step 3: Target project maintainer should Add user **TheOpenLab-CI** to project Collaborators in Settings -> Collaborators & teams of Github project, aims to **TheOpenLab-CI** user can update tests result in comments of PR through Github status API
+- Step 3: Target project maintainer should Add user **TheOpenLab-CI** to project Collaborators with **Admin** permission level in Settings -> Collaborators & teams of Github project, aims to **TheOpenLab-CI** can update check status in comments of PR through Github status API, just like Travis-CI and other CI bots do.
 
