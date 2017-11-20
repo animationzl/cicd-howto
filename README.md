@@ -823,7 +823,7 @@ EOF
                                                 v
 
                                       openlab-cicd-misc
-                                      +----------------------+                 github.com webhooks
+                                      +----------------------+                 github.com events
                                       |       Apache2        |                        +
                                       |       Gearman        |                        |
                                       |       Zookeeper      |                        |
