@@ -814,7 +814,7 @@ EOF
 
 ```txt
 
-                                     openlab status portal: http://80.158.20.68/
+                                     openlab status portal: http://status.openlabtesting.org/
                                                 +
                                                 |
                                                 |
