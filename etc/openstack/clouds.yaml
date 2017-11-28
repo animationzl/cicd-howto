@@ -1,0 +1,20 @@
+clouds:
+  openlab:
+    auth:
+      username: $USERNAME
+      password: $PASSWORD
+      project_id: $PROJECT_ID
+      auth_url: 'https://iam.eu-de.otc.t-systems.com/v3'
+      project_name: $PROJECT_NAME
+      project_domain_name: $PROJECT_DOMAIN_NAME
+      user_domain_name: $USER_DOMAIN_NAME
+    identity_api_version: '3'
+    network_api_version: '2.0'
+    volume_api_version: '2'
+    network_endpoint_override: 'https://vpc.eu-de.otc.t-systems.com/'
+    regions:
+    - name: $REGION_NAME
+      values:
+        networks:
+          - name: $NETWORK_NAME
+            default_interface: true
