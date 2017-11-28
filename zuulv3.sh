@@ -25,10 +25,11 @@ TOP_DIR=$(cd $(dirname "$0") && pwd)
 PREFIX_DIR=/etc/zuul
 . $TOP_DIR/local-conf.sh
 
-export LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
+LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
 export GEARMAN_IP=${GEARMAN_IP:-$LOCAL_IP}
 export STATSD_IP=${STATSD_IP:-$LOCAL_IP}
 export ZOOKEEPER_IP=${ZOOKEEPER_IP:-$LOCAL_IP}
+export WEB_LISTEN_IP=${WEB_LISTEN_IP:-$LOCAL_IP}
 export APP_ID=${APP_ID:-}
 export WEBHOOK_TOKEN=${WEBHOOK_TOKEN:-}
 

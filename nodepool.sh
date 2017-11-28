@@ -26,7 +26,7 @@ TOP_DIR=$(cd $(dirname "$0") && pwd)
 PREFIX_DIR=/etc/nodepool
 . $TOP_DIR/local-conf.sh
 
-export LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
+LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
 export ZOOKEEPER_IP=${ZOOKEEPER_IP:-$LOCAL_IP}
 export USERNAME=${USERNAME:-}
 export PASSWORD=${PASSWORD:-}
