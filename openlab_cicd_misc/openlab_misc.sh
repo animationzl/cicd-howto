@@ -18,35 +18,14 @@ cd /root
 # Add zuul user
 useradd -m -d /home/zuul -s /bin/bash zuul
 echo zuul:zuul | chpasswd
+
+# Add log server dir
 mkdir -p /srv/static/logs/
 chown zuul.zuul /srv/static/logs/ -R
+
 # Precondition
 apt update -y && apt upgrade -y
 apt install python python-pip python3 python3-pip default-jdk python-psycopg2 -y
-
-# Install bubblewrap
-apt install software-properties-common
-add-apt-repository ppa:openstack-ci-core/bubblewrap -y
-apt update -y
-apt install bubblewrap -y
-
-# Install Zookeeper
-wget http://apache.mirrors.ionfish.org/zookeeper/current/zookeeper-3.4.10.tar.gz
-tar xzf zookeeper-3.4.10.tar.gz
-cat << EOF > /root/zookeeper-3.4.10/conf/zoo.cfg
-tickTime=2000
-dataDir=/var/lib/zookeeper
-clientPort=2181
-EOF
-/root/zookeeper-3.4.10/bin/zkServer.sh start
-
-#Install gearman
-apt-get install gearman-job-server -y
-# Modify gearman to listen all
-sed -i 's/127.0.0.1/0.0.0.0/1' /lib/systemd/system/gearman-job-server.service
-sed -i 's/127.0.0.1/0.0.0.0/1' /etc/systemd/system/multi-user.target.wants/gearman-job-server.service
-systemctl daemon-reload
-service gearman-job-server restart
 
 # Install apache2
 apt-get install apache2 -y
@@ -101,12 +80,12 @@ service carbon-cache start
 service statsd restart
 
 # Install zuul status
-sed -i s/zuul-server-ip/${ZUUL_SERVER_IP}/g $cdir/conf/zuul/zuul.conf
+cp $cdir/conf/zuul/zuul.conf /etc/apache2/sites-available/
+sed -i s/zuul-server-ip/${ZUUL_SERVER_IP}/g /etc/apache2/sites-available/zuul.conf
 git clone git://git.openstack.org/openstack-infra/zuul $cdir/zuul-repo
 sh $cdir/zuul-repo/etc/status/fetch-dependencies.sh
 mkdir -p /var/lib/zuul/www
 cp -r $cdir/zuul-repo/etc/status/public_html/* /var/lib/zuul/www/
-cp $cdir/conf/zuul/zuul.conf /etc/apache2/sites-available/
 #htpasswd -cbB /etc/apache2/grafana_htpasswd openlab openlab
 
 sudo service carbon-cache stop
