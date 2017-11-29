@@ -1,20 +1,19 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
+if [ "$EUID" -ne 0 ]; then
     echo "You should run this script as root."
     exit 1
 fi
 
-# Add user zuul if not exits
+# Add user zuul and generate ssh key if not exits
 if ! id -u zuul > /dev/null 2>&1; then
     useradd -m -d /home/zuul -s /bin/bash zuul
     echo zuul:zuul | chpasswd
+    su - zuul -c "
+        ssh-keygen -f /home/zuul/.ssh/id_rsa -t rsa -N ''
+        cat /home/zuul/.ssh/id_rsa.pub > /home/zuul/.ssh/authorized_keys
+    "
 fi
-
-# Generate ssh key
-su - zuul -c "
-ssh-keygen -f /home/zuul/.ssh/id_rsa -t rsa -N ''
-"
 
 mkdir -p /etc/nodepool/elements
 mkdir -p /var/log/nodepool
