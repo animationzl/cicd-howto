@@ -113,6 +113,20 @@ service carbon-cache start
 service statsd restart
 service grafana-server restart
 
+# Configure apache security
+DEBIAN_FRONTEND=noninteractive apt-get install libapache2-mod-evasive libapache2-modsecurity -y
+mv /etc/modsecurity/modsecurity.conf{-recommended,}
+sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' /etc/modsecurity/modsecurity.conf
+mkdir -p /var/log/mod_evasive
+a2enmod evasive
+a2enmod security2
+cp $cdir/conf/mod_evasive/evasive.conf /etc/apache/mods-available/
+
+apt-get install fail2ban -y
+cp $cdir/conf/fail2ban/jail.local /etc/fail2ban/jail.local
+cp $cdir/conf/fail2ban/apache-modsecurity.conf /etc/fail2ban/filter.d/
+service fail2ban restart
+
 a2dissite 000-default
 a2ensite apache2-graphite
 a2ensite zuul
