@@ -4,8 +4,13 @@ GEARMAN_IP=
 STATSD_IP=
 ZOOKEEPER_IP=
 WEB_LISTEN_IP=
+LOGSERVER_IP=
 APP_ID=
+APP_KEY=
 WEBHOOK_TOKEN=
+
+# Pem file directory, to sync sshkey among servers
+OPENLAB_CICD_PEM=
 
 # Cloud credentials
 USERNAME=
