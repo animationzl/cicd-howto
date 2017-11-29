@@ -33,18 +33,7 @@ export WEB_LISTEN_IP=${WEB_LISTEN_IP:-$LOCAL_IP}
 export APP_ID=${APP_ID:-}
 export WEBHOOK_TOKEN=${WEBHOOK_TOKEN:-}
 
-CONFIGS="
-executor-logging.conf
-gearman-logging.conf
-main.yaml
-merger-logging.conf
-scheduler-logging.conf
-site-variables.yaml
-web-logging.conf
-zuul.conf
-"
-
-for config in $CONFIGS
+for config in $(ls $TOP_DIR/$PREFIX_DIR)
 do
     envsubst < "$TOP_DIR/$PREFIX_DIR/$config" > "$PREFIX_DIR/$config"
 done

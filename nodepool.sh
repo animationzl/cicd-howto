@@ -37,15 +37,7 @@ export USER_DOMAIN_NAME=${USER_DOMAIN_NAME:-}
 export REGION_NAME=${REGION_NAME:-}
 export NETWORK_NAME=${NETWORK_NAME:-}
 
-CONFIGS="
-builder-logging.conf
-launcher-logging.conf
-nodepool.yaml
-repos.yaml
-secure.conf
-"
-
-for config in $CONFIGS
+for config in $(ls $TOP_DIR/$PREFIX_DIR)
 do
     envsubst < "$TOP_DIR/$PREFIX_DIR/$config" > "$PREFIX_DIR/$config"
 done
