@@ -83,6 +83,7 @@ wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.5.2_a
 sudo apt-get install -y adduser libfontconfig
 sudo dpkg -i grafana_4.5.2_amd64.deb
 cp $cdir/conf/grafana/* /etc/grafana/
+service grafana-server restart
 
 # install statsd
 apt-get install git nodejs devscripts debhelper dh-systemd -y
@@ -106,7 +107,7 @@ sh $cdir/zuul-repo/etc/status/fetch-dependencies.sh
 mkdir -p /var/lib/zuul/www
 cp -r $cdir/zuul-repo/etc/status/public_html/* /var/lib/zuul/www/
 cp $cdir/conf/zuul/zuul.conf /etc/apache2/sites-available/
-htpasswd -cbB /etc/apache2/grafana_htpasswd openlab openlab
+#htpasswd -cbB /etc/apache2/grafana_htpasswd openlab openlab
 
 sudo service carbon-cache stop
 service carbon-cache start
