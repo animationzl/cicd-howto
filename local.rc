@@ -1,4 +1,4 @@
-# Internal IP of service deployed machine
+# Internal IP of each service
 export ZUUL_IP=
 export NODEPOOL_IP=
 export GEARMAN_IP=
@@ -14,8 +14,7 @@ export APP_KEY=
 # https://docs.openstack.org/infra/zuul/admin/drivers/github.html#attr-<github connection>.webhook_token
 export WEBHOOK_TOKEN=
 
-# Path to a file containing the private key to login CI servers,
-# will use to sync ssh key of zuul user among servers
+# Path of the private key file used to access the service nodes
 export OPENLAB_CICD_PEM=
 
 # Cloud credentials

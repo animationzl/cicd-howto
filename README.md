@@ -1,57 +1,6 @@
 # OpenLab CI/CD
 _steps to replicate the CI/CD environment_
 
-## Step-by-step
-
-```shell
-cd /root
-git clone http://github.com/theopenlab/cicd-howto
-cd cicd-howto
-```
-
-```shell
-# Configure and export the variable
-vim local.rc
-source local.rc
-```
-
-```shell
-# Install zuulv3
-bash -x zuulv3.sh
-```
-
-```shell
-# Install nodepool
-bash -x nodepool.sh
-```
-
-```shell
-# Sync ssh keys
-bash -x sync-sshkey.sh
-```
-
-```shell
-# Add ssh public key to git_user_name which is specified in merger section of ./etc/zuul/zuul.conf
-```
-
-```shell
-# Install gearman and zookeeper
-bash -x openlab_cicd_misc/gearman_zookeeper.sh
-```
-
-```shell
-# Install apache related services
-bash -x openlab_cicd_misc/openlab_misc.sh
-```
-
-```shell
-# Update secrets.yaml in theopenlab/project-config
-```
-
-```shell
-# Start zuul,nodepool services
-```
-
 ## Reference deployment view
 
 ```txt
@@ -96,6 +45,59 @@ openlab-cicd-nodepool                                                          o
 
 
 ```
+
+## Step-by-step
+
+```shell
+# Commands need to be executed first on every node
+
+# Clone and cd into repo
+cd /root
+git clone http://github.com/theopenlab/cicd-howto
+cd cicd-howto
+
+# Configure and export the variables
+vim local.rc
+source local.rc
+```
+
+```shell
+# Execute following commands on the zuul node
+
+# Install zuulv3
+bash -x zuulv3.sh
+```
+
+```shell
+# Execute following commands on the nodepool node
+
+# Install nodepool
+bash -x nodepool.sh
+
+# Sync ssh keys of zuul user
+bash -x sync-sshkey.sh
+
+# Add ssh public key of zuul user to git_user_name specified in merger section of /root/cicd-howto/etc/zuul/zuul.conf
+```
+
+```shell
+# Execute following commands on the misc node
+
+# Install gearman and zookeeper
+bash -x openlab_cicd_misc/gearman_zookeeper.sh
+
+# Install apache related services
+bash -x openlab_cicd_misc/openlab_misc.sh
+```
+
+```shell
+# Update secrets.yaml in theopenlab/project-config manually
+```
+
+```shell
+# Start zuul,nodepool services on corresponding node
+```
+
 ## Connect to OpenLab
 
 - Step 1: OpenLab maintainer will commit an issue to target project that plan to connect OpenLab, let target project maintainers know what we want to do, and discuss some details, looks like: [gophercloud Issue 592](https://github.com/gophercloud/gophercloud/issues/592)
