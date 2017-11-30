@@ -11,7 +11,7 @@ if [[ -z "$ZUUL_IP" ]]; then
     exit 1
 fi
 
-cdir=$(pwd)
+cdir=$(cd $(dirname "$0") && pwd)
 
 cd /root
 
