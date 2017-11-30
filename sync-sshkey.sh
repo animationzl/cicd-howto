@@ -5,17 +5,11 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-TOP_DIR=$(cd $(dirname "$0") && pwd)
-. $TOP_DIR/local-conf.sh
-
-LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
-ZUUL_IP=${ZUUL_IP:-$LOCAL_IP}
-NODEPOOL_IP=${NODEPOOL_IP:-$LOCAL_IP}
-LOGSERVER_IP=${LOGSERVER_IP:-$LOCAL_IP}
-
 if [ -z "$OPENLAB_CICD_PEM" ]; then
-    echo 'You must specify the pem file directory in OPENLAB_CICD_PEM.'
+    echo 'OPENLAB_CICD_PEM must be set.'
     exit 1
+else
+    chmod 600 "$OPENLAB_CICD_PEM"
 fi
 
 # Add user zuul and generate ssh key if not exits
@@ -27,6 +21,8 @@ if ! id -u zuul > /dev/null 2>&1; then
         cat /home/zuul/.ssh/id_rsa.pub > /home/zuul/.ssh/authorized_keys
     "
 fi
+
+LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
 
 for host in $ZUUL_IP $NODEPOOL_IP $LOGSERVER_IP
 do

@@ -4,7 +4,7 @@ clouds:
       username: $USERNAME
       password: $PASSWORD
       project_id: $PROJECT_ID
-      auth_url: 'https://iam.eu-de.otc.t-systems.com/v3'
+      auth_url: $AUTH_URL
       project_name: $PROJECT_NAME
       project_domain_name: $PROJECT_DOMAIN_NAME
       user_domain_name: $USER_DOMAIN_NAME

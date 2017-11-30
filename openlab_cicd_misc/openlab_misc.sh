@@ -6,8 +6,8 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-if [[ -z "$ZUUL_SERVER_IP" ]]; then
-    echo "The ZUUL_SERVER_IP must be set."
+if [[ -z "$ZUUL_IP" ]]; then
+    echo "The ZUUL_IP must be set."
     exit 1
 fi
 
@@ -81,7 +81,7 @@ service statsd restart
 
 # Install zuul status
 cp $cdir/conf/zuul/zuul.conf /etc/apache2/sites-available/
-sed -i s/zuul-server-ip/${ZUUL_SERVER_IP}/g /etc/apache2/sites-available/zuul.conf
+sed -i s/zuul-server-ip/${ZUUL_IP}/g /etc/apache2/sites-available/zuul.conf
 git clone git://git.openstack.org/openstack-infra/zuul $cdir/zuul-repo
 sh $cdir/zuul-repo/etc/status/fetch-dependencies.sh
 mkdir -p /var/lib/zuul/www

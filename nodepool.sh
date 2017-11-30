@@ -23,18 +23,6 @@ mkdir -p /etc/openstack
 
 TOP_DIR=$(cd $(dirname "$0") && pwd)
 PREFIX_DIR=/etc/nodepool
-. $TOP_DIR/local-conf.sh
-
-LOCAL_IP=$(ifconfig | awk '/inet addr/ {print substr($2, 6)}' | grep 192)
-export ZOOKEEPER_IP=${ZOOKEEPER_IP:-$LOCAL_IP}
-export USERNAME=${USERNAME:-}
-export PASSWORD=${PASSWORD:-}
-export PROJECT_ID=${PROJECT_ID:-}
-export PROJECT_NAME=${PROJECT_NAME:-}
-export PROJECT_DOMAIN_NAME=${PROJECT_DOMAIN_NAME:-}
-export USER_DOMAIN_NAME=${USER_DOMAIN_NAME:-}
-export REGION_NAME=${REGION_NAME:-}
-export NETWORK_NAME=${NETWORK_NAME:-}
 
 for config in $(ls $TOP_DIR/$PREFIX_DIR)
 do

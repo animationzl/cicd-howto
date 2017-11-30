@@ -10,8 +10,9 @@ cd cicd-howto
 ```
 
 ```shell
-# Configure the variables
-vim local-conf.sh
+# Configure and export the variable
+vim local.rc
+source local.rc
 ```
 
 ```shell
@@ -22,11 +23,6 @@ bash -x zuulv3.sh
 ```shell
 # Install nodepool
 bash -x nodepool.sh
-```
-
-```shell
-# Configured in local-conf.sh
-chmod 600 $OPENLAB_CICD_PEM
 ```
 
 ```shell
@@ -44,8 +40,8 @@ bash -x openlab_cicd_misc/gearman_zookeeper.sh
 ```
 
 ```shell
-# Specify the ZUUL_SERVER_IP and install apache related services
-ZUUL_SERVER_IP=${YOUR_IP} bash -x openlab_cicd_misc/openlab_misc.sh
+# Install apache related services
+bash -x openlab_cicd_misc/openlab_misc.sh
 ```
 
 ```shell
@@ -53,7 +49,7 @@ ZUUL_SERVER_IP=${YOUR_IP} bash -x openlab_cicd_misc/openlab_misc.sh
 ```
 
 ```shell
-# Start services
+# Start zuul,nodepool services
 ```
 
 ## Reference deployment view
