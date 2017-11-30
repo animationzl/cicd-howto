@@ -44,13 +44,6 @@ git clone https://github.com/openstack-infra/project-config
 cd project-config
 rsync -avz nodepool/elements/ /etc/nodepool/elements/
 
-# Install DiskImage Builder
-cd /root
-git clone https://github.com/openstack/diskimage-builder
-cd diskimage-builder
-pip install -r requirements.txt
-pip install -e .
-
 # Install Nodepool v3
 cd /root
 git clone https://github.com/openstack-infra/nodepool -b feature/zuulv3
