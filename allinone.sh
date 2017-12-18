@@ -7,16 +7,16 @@ source $CHDIR/allinone/allinonerc
 mv /etc/apt/sources.list /etc/apt/sources.list-bak
 cp $CHDIR/allinone/sources.list /etc/apt/
 
-./$CHDIR/openlab_cicd_misc/gearman_zookeeper.sh
+$CHDIR/openlab_cicd_misc/gearman_zookeeper.sh
 
-./$CHDIR/sync-sshkey.sh
-./$CHDIR/nodepool.sh
-./$CHDIR/zuulv3.sh
+$CHDIR/sync-sshkey.sh
+$CHDIR/nodepool.sh
+$CHDIR/zuulv3.sh
 
 cp $CHDIR/allinone/main.yaml /etc/zuul/
 cp $CHDIR/allinone/nodepool.yaml /etc/nodepool/
 
-./$CHDIR/openlab_cicd_misc/openlab_misc.sh
+$CHDIR/openlab_cicd_misc/openlab_misc.sh
 
 cp $CHDIR/allinone/zuul.yaml /etc/zuul/
 
