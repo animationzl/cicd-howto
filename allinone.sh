@@ -19,7 +19,7 @@ cp $CHDIR/allinone/nodepool.yaml /etc/nodepool/
 $CHDIR/openlab_cicd_misc/openlab_misc.sh
 
 envsubst < $CHDIR/etc/zuul/zuul.conf > /etc/zuul/zuul.conf
-cat << EOF > /etc/zuul/zuul.conf
+cat << EOF >> /etc/zuul/zuul.conf
 [connection mysql]
 driver=sql
 dburi=mysql+pymysql://zuul:zuul@zuul-server-ip/zuul
