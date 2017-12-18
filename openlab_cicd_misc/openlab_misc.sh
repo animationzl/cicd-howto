@@ -81,7 +81,7 @@ service statsd restart
 
 # Install zuul status
 cp $cdir/conf/zuul/zuul-web.conf /etc/apache2/sites-available/
-git clone git://git.openstack.org/openstack-infra/zuul /root/zuul
+git clone git://git.openstack.org/openstack-infra/zuul /root/zuul -b feature/zuulv3
 mkdir -p /var/www/zuul-web
 mkdir -p /etc/zuul/
 DEST_DIR=/root/zuul/zuul/web/static/
@@ -101,11 +101,13 @@ python2 -mrjsmin < $DEST_DIR/graphitejs-master/jquery.graphite.js > $DEST_DIR/js
 rm -Rf jquery-graphite.zip $DEST_DIR/graphitejs-master
 
 pip3 install -r /root/zuul/requirements.txt
+pip3 install pymysql
 pip3 install -e /root/zuul
 cp -r /root/zuul/zuul/web/static/* /var/www/zuul-web/
 cp $cdir/conf/zuul/zuul.conf /etc/zuul/
 cp $cdir/conf/zuul/web-logging.conf /etc/zuul/
 sed -i s/zuul-server-ip/${ZUUL_IP}/g /etc/zuul/zuul.conf
+mkdir -p /var/log/zuul/
 /usr/bin/python3 /usr/local/bin/zuul-web -d > /dev/null 2>1 &
 #htpasswd -cbB /etc/apache2/grafana_htpasswd openlab openlab
 
