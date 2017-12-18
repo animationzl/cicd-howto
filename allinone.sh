@@ -18,6 +18,8 @@ cp $CHDIR/allinone/nodepool.yaml /etc/nodepool/
 
 ./$CHDIR/openlab_cicd_misc/openlab_misc.sh
 
+cp $CHDIR/allinone/zuul.yaml /etc/zuul/
+
 /usr/bin/python3 /usr/local/bin/nodepool-builder -d -l /etc/nodepool/builder-logging.conf -c /etc/nodepool/nodepool.yaml > /dev/null 2>1 &
 /usr/bin/python3 /usr/local/bin/nodepool-launcher -d -l /etc/nodepool/launcher-logging.conf -c /etc/nodepool/nodepool.yaml > /dev/null 2>1 &
 /usr/bin/python3 /usr/local/bin/zuul-executor -d --keep-jobdir > /dev/null 2>1 &
