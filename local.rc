@@ -6,6 +6,7 @@ export STATSD_IP=
 export ZOOKEEPER_IP=
 export WEB_LISTEN_IP=
 export LOGSERVER_IP=
+export ZUUL_WEB_IP=
 
 # https://docs.openstack.org/infra/zuul/admin/drivers/github.html#attr-<github connection>.app_id
 export APP_ID=

@@ -1,0 +1,12 @@
+UPDATE mysql.user SET Password=PASSWORD('root') WHERE User='root';
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+DROP DATABASE IF EXISTS test;
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+FLUSH PRIVILEGES;
+CREATE USER 'zuul'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'zuul'@'$ZUUL_WEB_IP' IDENTIFIED BY 'password';
+CREATE DATABASE IF NOT EXISTS zuul;
+GRANT ALL PRIVILEGES ON zuul.* TO 'zuul'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON zuul.* TO 'zuul'@'$ZUUL_WEB_IP' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;

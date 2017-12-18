@@ -31,6 +31,10 @@ done
 # Install dependencies
 apt update && apt upgrade -y
 apt install python python-pip python3 python3-pip -y
+apt install mariadb-server mariadb-client python-pymysql -y
+
+# Install mysql
+mysql -sfu root < "$PREFIX_DIR/mysql_secure_installation.sql"
 
 # Install Zuul v3
 cd /home/zuul
