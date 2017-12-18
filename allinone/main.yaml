@@ -1,0 +1,19 @@
+- tenant:
+    name: openlaballinone
+    source:
+      github:
+        config-projects:
+          - theopenlab/project-config
+        untrusted-projects:
+          # Order matters, load common job repos first
+          - theopenlab/zuul-jobs:
+              shadow: theopenlab/project-config
+          - theopenlab/openlab-zuul-jobs:
+              exclude-unprotected-branches: true
+          # For testing purpose
+          - theopenlab/gophercloud
+          - theopenlab/terraform:
+              exclude-unprotected-branches: true
+          - theopenlab/terraform-provider-openstack
+          # After this point, sorting projects alphabetically will help
+          # merge conflicts
