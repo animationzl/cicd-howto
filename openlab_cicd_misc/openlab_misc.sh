@@ -80,12 +80,33 @@ service carbon-cache start
 service statsd restart
 
 # Install zuul status
-cp $cdir/conf/zuul/zuul.conf /etc/apache2/sites-available/
-sed -i s/zuul-server-ip/${ZUUL_IP}/g /etc/apache2/sites-available/zuul.conf
-git clone git://git.openstack.org/openstack-infra/zuul $cdir/zuul-repo
-sh $cdir/zuul-repo/etc/status/fetch-dependencies.sh
-mkdir -p /var/lib/zuul/www
-cp -r $cdir/zuul-repo/etc/status/public_html/* /var/lib/zuul/www/
+cp $cdir/conf/zuul/zuul-web.conf /etc/apache2/sites-available/
+git clone git://git.openstack.org/openstack-infra/zuul /root/zuul
+mkdir -p /var/www/zuul-web
+mkdir -p /etc/zuul/
+DEST_DIR=/root/zuul/zuul/web/static/
+
+mkdir -p $DEST_DIR/js
+curl -L --silent https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js > $DEST_DIR/js/angular.min.js
+curl -L --silent http://code.jquery.com/jquery.min.js > $DEST_DIR/js/jquery.min.js
+curl -L --silent https://raw.githubusercontent.com/mathiasbynens/jquery-visibility/master/jquery-visibility.js > $DEST_DIR/js/jquery-visibility.js
+python2 -mrjsmin < $DEST_DIR/js/jquery-visibility.js > $DEST_DIR/js/jquery-visibility.min.js
+curl -L --silent https://github.com/twbs/bootstrap/releases/download/v3.1.1/bootstrap-3.1.1-dist.zip > bootstrap.zip
+unzip -q -o bootstrap.zip -d $DEST_DIR/
+mv $DEST_DIR/bootstrap-3.1.1-dist $DEST_DIR/bootstrap
+rm -f bootstrap.zip
+curl -L --silent https://github.com/prestontimmons/graphitejs/archive/master.zip > jquery-graphite.zip
+unzip -q -o jquery-graphite.zip -d $DEST_DIR/
+python2 -mrjsmin < $DEST_DIR/graphitejs-master/jquery.graphite.js > $DEST_DIR/js/jquery.graphite.min.js
+rm -Rf jquery-graphite.zip $DEST_DIR/graphitejs-master
+
+pip3 install -r /root/zuul/requirements.txt
+pip3 install -e /root/zuul
+cp -r /root/zuul/zuul/web/static/* /var/www/zuul-web/
+cp $cdir/conf/zuul/zuul.conf /etc/zuul/
+cp $cdir/conf/zuul/web-logging.conf /etc/zuul/
+sed -i s/zuul-server-ip/${ZUUL_IP}/g /etc/zuul/zuul.conf
+/usr/bin/python3 /usr/local/bin/zuul-web -d > /dev/null 2>1 &
 #htpasswd -cbB /etc/apache2/grafana_htpasswd openlab openlab
 
 sudo service carbon-cache stop
@@ -109,7 +130,7 @@ service fail2ban restart
 
 a2dissite 000-default
 a2ensite apache2-graphite
-a2ensite zuul
+a2ensite zuul-web
 a2enmod proxy
 a2enmod proxy_http
 a2enmod ssl
