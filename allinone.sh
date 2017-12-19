@@ -14,7 +14,7 @@ $CHDIR/nodepool.sh
 $CHDIR/zuulv3.sh
 
 cp $CHDIR/allinone/main.yaml /etc/zuul/
-cp $CHDIR/allinone/nodepool.yaml /etc/nodepool/
+envsubst < $CHDIR/allinone/nodepool.yaml > /etc/nodepool/nodepool.yaml
 
 $CHDIR/openlab_cicd_misc/openlab_misc.sh
 
@@ -22,7 +22,7 @@ envsubst < $CHDIR/etc/zuul/zuul.conf > /etc/zuul/zuul.conf
 cat << EOF >> /etc/zuul/zuul.conf
 [connection mysql]
 driver=sql
-dburi=mysql+pymysql://zuul:zuul@zuul-server-ip/zuul
+dburi=mysql+pymysql://zuul:zuul@127.0.0.1/zuul
 EOF
 
 /usr/bin/python3 /usr/local/bin/nodepool-builder -d -l /etc/nodepool/builder-logging.conf -c /etc/nodepool/nodepool.yaml > /dev/null 2>1 &
