@@ -123,7 +123,7 @@ sed -i 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' /etc/modsecurity/modse
 mkdir -p /var/log/mod_evasive
 a2enmod evasive
 a2enmod security2
-cp $cdir/conf/mod_evasive/evasive.conf /etc/apache/mods-available/
+cp $cdir/conf/mod_evasive/evasive.conf /etc/apache2/mods-available/
 
 apt-get install fail2ban -y
 cp $cdir/conf/fail2ban/jail.local /etc/fail2ban/jail.local
