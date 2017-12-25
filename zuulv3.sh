@@ -30,7 +30,7 @@ done
 
 # Install dependencies
 apt update && apt upgrade -y
-apt install python python-pip python3 python3-pip -y
+apt install python python-pip python3 python3-pip python3-crypto -y
 apt install mariadb-server mariadb-client python-pymysql -y
 
 # Install mysql
