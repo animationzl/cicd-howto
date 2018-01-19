@@ -31,7 +31,7 @@ diskimages:
 
 labels:
   - name: ubuntu-xenial
-    min-ready: 1
+    min-ready: 2
 
 providers:
   - name: openlaballinone
@@ -41,7 +41,7 @@ providers:
       - name: ubuntu-xenial
     pools:
       - name: openlaballinone
-        max-servers: 2
+        max-servers: 3
         networks:
           - $NETWORK_NAME
         auto-floating-ip: False
