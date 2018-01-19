@@ -139,4 +139,5 @@ a2enmod ssl
 a2enmod xml2enc
 a2enmod rewrite
 a2enmod headers
+a2enmod proxy_wstunnel
 service apache2 restart

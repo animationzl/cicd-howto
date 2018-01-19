@@ -12,8 +12,5 @@
               exclude-unprotected-branches: true
           # For testing purpose
           - theopenlab/gophercloud
-          - theopenlab/terraform:
-              exclude-unprotected-branches: true
-          - theopenlab/terraform-provider-openstack
           # After this point, sorting projects alphabetically will help
           # merge conflicts
