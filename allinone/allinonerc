@@ -7,7 +7,6 @@ export ZOOKEEPER_IP=127.0.0.1
 export WEB_LISTEN_IP=127.0.0.1
 export LOGSERVER_IP=127.0.0.1
 export ZUUL_WEB_IP=127.0.0.1
-export ZUUL_IP=127.0.0.1
 
 # Need to modify following options
 

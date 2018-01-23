@@ -29,5 +29,3 @@ do
     /usr/bin/python3 /usr/local/bin/zuul-$bin
     sleep 2
 done
-
-

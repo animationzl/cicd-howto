@@ -1,102 +1,11 @@
 # OpenLab CI/CD
-_steps to replicate the CI/CD environment_
 
-## Reference deployment view
-
-```txt
-
-                                     openlab status portal: http://status.openlabtesting.org/
-                                                +
-                                                |
-                                                |
-                                                |
-                                                |
-                                                v
-
-                                      openlab-cicd-misc
-                                      +----------------------+                 github.com events
-                                      |       Apache2        |                        +
-                                      |       Gearman        |                        |
-                                      |       Zookeeper      |                        |
-                                      |       Log-server     |                        |
-                                      |       Statsd         |                        v
-                                      +----------------------+
-openlab-cicd-nodepool                                                          openlab-cicd-zuul
-+----------------------+                  +              +                     +-----------------------+
-|                      |                  |              |                     |                       |
-|   Nodepool-launcher  |                  |              |                     |     Zuul-scheduler    |
-|   Nodepool-builder   |  <---------------+              +------------------>  |     Zuul-executor     |
-|                      |                                                       |     Zuul-web          |
-+----------------------+                                                       |     Zuul-merger       |
-                                                                               |                       |
-           +                                                                   +-----------------------+
-           |
-           |  Launch vm from provider                                                 +
-           |                                                                          |
-           v                                                                          |
-                                                                                      |
-+----------------------+                                                              |
-|                      |                     Execute Ansible jobs                     |
-|                      |                                                              |
-|       Provider       |  <-----------------------------------------------------------+
-|  (vm, bm, container) |
-|                      |
-+----------------------+
-
-
-```
-
-## Step-by-step
-
-```shell
-# Commands need to be executed first on every node
-
-# Clone and cd into repo
-cd /root
-git clone http://github.com/theopenlab/cicd-howto
-cd cicd-howto
-
-# Configure and export the variables
-vim local.rc
-source local.rc
-```
-
-```shell
-# Execute following commands on the zuul node
-
-# Install zuulv3
-bash -x zuulv3.sh
-```
-
-```shell
-# Execute following commands on the nodepool node
-
-# Install nodepool
-bash -x nodepool.sh
-
-# Sync ssh keys of zuul user
-bash -x sync-sshkey.sh
-
-# Add ssh public key of zuul user to git_user_name specified in merger section of /root/cicd-howto/etc/zuul/zuul.conf
-```
-
-```shell
-# Execute following commands on the misc node
-
-# Install gearman and zookeeper
-bash -x openlab_cicd_misc/gearman_zookeeper.sh
-
-# Install apache related services
-bash -x openlab_cicd_misc/openlab_misc.sh
-```
-
-```shell
-# Update secrets.yaml in theopenlab/project-config manually
-```
-
-```shell
-# Start zuul,nodepool services on corresponding node
-```
+OpenLab’s mission is to enable the testing, reporting, and development of tools
+and applications for hybrid and multi-cloud environments. OpenLab CI provide a
+auto testing system for different upstream tool chains of OpenStack, e.g.
+Gophercloud, Terraform. The OpenLab CI is built based on `NodePool` and `Zuul`
+tools of the OpenStack infrastructure. It have multiple resource pools
+provided by multiple cloud providers to run testing jobs.
 
 ## Connect to OpenLab
 

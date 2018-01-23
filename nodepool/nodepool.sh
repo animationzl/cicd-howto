@@ -21,17 +21,17 @@ mkdir -p /opt/dib_tmp
 mkdir -p /opt/dib_cache
 mkdir -p /etc/openstack
 
-TOP_DIR=$(cd $(dirname "$0") && pwd)
-PREFIX_DIR=/etc/nodepool
+CURR_DIR=$(cd $(dirname "$0") && pwd)
+CONF_DIR=/etc/nodepool
 
-for config in $(ls $TOP_DIR/$PREFIX_DIR)
+for config in $(ls $CURR_DIR/conf)
 do
-    envsubst < "$TOP_DIR/$PREFIX_DIR/$config" > "$PREFIX_DIR/$config"
+    envsubst < "$CURR_DIR/conf/$config" > "$CONF_DIR/$config"
 done
 
-PREFIX_DIR=/etc/openstack
+OS_CONF_DIR=/etc/openstack
 config=clouds.yaml
-envsubst < "$TOP_DIR/$PREFIX_DIR/$config" > "$PREFIX_DIR/$config"
+envsubst < "$CURR_DIR/../common/openstack/$config" > "$OS_CONF_DIR/$config"
 
 # Install dependencies
 apt update && apt upgrade -y
@@ -46,7 +46,7 @@ rsync -avz nodepool/elements/ /etc/nodepool/elements/
 
 # Install Nodepool v3
 cd /root
-git clone https://github.com/openstack-infra/nodepool -b feature/zuulv3
+git clone https://github.com/openstack-infra/nodepool
 cd nodepool
 pip3 install -r requirements.txt
 pip3 install -e .

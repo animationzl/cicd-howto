@@ -81,7 +81,7 @@ service statsd restart
 
 # Install zuul status
 cp $cdir/conf/zuul/zuul-web.conf /etc/apache2/sites-available/
-git clone git://git.openstack.org/openstack-infra/zuul /root/zuul -b feature/zuulv3
+git clone git://git.openstack.org/openstack-infra/zuul /root/zuul
 mkdir -p /var/www/zuul-web
 mkdir -p /etc/zuul/
 DEST_DIR=/root/zuul/zuul/web/static/
